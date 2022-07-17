@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import Cell from './Cell';
 import './App.css';
 
 function App() {
+  const [board, setBoard] = useState(Array(9).fill().map(() => Array(9).fill(0)));
+  const [moves, setmoves] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div className="grid">
+        {
+          Array(9).fill().map((_, row) =>
+            <div key={row} className='row'>
+              {
+                Array(9).fill().map((_, col) => (
+                  <Cell key={col} row={row} col={col} board={board} setBoard={setBoard} />
+                ))
+              }
+            </div>
+          )
+        }
+      </div>
+      {/* <button>
+        Go back
+      </button>
+      <button onClick={() => setBoard(Array(9).fill().map(() => Array(9).fill(0)))}>
+        Restart
+      </button> */}
     </div>
   );
 }
